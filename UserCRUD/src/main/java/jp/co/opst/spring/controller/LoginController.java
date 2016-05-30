@@ -28,10 +28,12 @@ public class LoginController {
 
             // TODO authority別処理！
 
-            return "redirect:/top";
+            return "redirect:/top.html";
         } else {
-            model.addAttribute("loginError", "Login faild");
-            return "/";
+            model.addAttribute("errorMessage", "Login faild");
+            model.addAttribute("hasError", true);
+
+            return "redirect:/";
         }
     }
 

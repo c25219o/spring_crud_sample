@@ -8,7 +8,7 @@ public class TopController {
 
     @RequestMapping("/top")
     public String topPage(){
-        return "/user/top";
+        return "user/top";
     }
 
 }
