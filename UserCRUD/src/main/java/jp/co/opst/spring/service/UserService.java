@@ -16,17 +16,15 @@ public class UserService {
     private UserDao dao;
 
     public boolean isCorrectUser(String userId, String password) {
-        List<User> list = dao.byId(userId);
 
-        for (User user : list) {
-            if (user.getPassword() == null) {
-                return false;
-            }
-            if (!password.equals(user.getPassword())) {
-                return false;
-            }
+        User user = selectById(userId);
+
+        if (password.equals(user.getPassword())) {
+            return true;
+
+        } else {
+            return false;
         }
-        return true;
     }
 
 
