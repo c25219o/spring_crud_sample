@@ -1,0 +1,75 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+  <!-- base package 配下にcontrollerをおく -->
+  <context:component-scan base-package="jp.co.opst.spring" />
+
+  <bean id="viewResolver"
+    class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="viewClass"
+      value="org.springframework.web.servlet.view.JstlView" />
+    <property name="prefix" value="/WEB-INF/jsp/" />
+    <property name="suffix" value=".jsp" />
+  </bean>
+
+  <!-- バリデーションチェックのメッセージもプロパティファイルでの管理を利用 -->
+  <bean id="validator"
+    class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+    <property name="validationMessageSource" ref="messageSource" />
+  </bean>
+
+  <!-- メッセージ管理のプロパティファイルの設定 -->
+  <!-- classpath:/はソースフォルダに入れることを示す -->
+  <!-- 拡張子は省略されるため、messageはmessage.propertiesを示す -->
+  <bean id="messageSource"
+    class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    <property name="basename" value="classpath:/resources/message" />
+  </bean>
+
+  <!-- アノテーションによるバリデーションチェックの利用 -->
+  <mvc:annotation-driven validator="validator" />
+
+
+  <!-- Springのコネクションプールの利用 -->
+  <!-- <bean id="dataSource"
+    class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+    <property name="url" value="jdbc:mysql://192.168.50.101:3306/user99" />
+    <property name="username" value="user99" />
+    <property name="password" value="user99" />
+  </bean> -->
+
+  <!-- SpringのTemplateの利用 -->
+  <bean
+    class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+    <constructor-arg ref="dataSource" />
+  </bean>
+
+  <!-- DB接続情報をプロパティファイルに外出し -->
+  <context:property-placeholder location="classpath:jdbc.properties" />
+
+  <!-- コネクションプールをApache DBCPに変更 -->
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+    destroy-method="close">
+    <property name="driverClassName" value="${jdbc.driverClassName}" />
+    <property name="url" value="${jdbc.url}" />
+    <property name="username" value="${jdbc.username}" />
+    <property name="password" value="${jdbc.password}" />
+  </bean>
+
+
+</beans>

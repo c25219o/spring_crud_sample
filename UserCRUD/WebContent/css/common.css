@@ -1,0 +1,49 @@
+@CHARSET "UTF-8";
+
+@font-face {
+  font-family: 'WebFont';
+  src: url(../font/ROUNDED-MPLUS-2P-LIGHT.TTF);
+}
+
+body {
+  font-family: WebFont;
+  font-size: 120%;
+  font-weight: bolder;
+  background-color: #CCCCCCs;
+}
+
+input {
+  font-family: WebFont;
+  font-weight: bolder;
+}
+
+td.inForm {
+  padding: 7px 15px 7px 0px;
+}
+
+.fieldwrapper {
+  margin: 100px auto;
+  width: 70%;
+  height: 50%;
+  padding: 30px;
+  border: 3px dashed #E6399B;
+  border-radius: 10px;
+  bachground-color: #FFFFFF;
+}
+
+.paragraph {
+  margin: 0px 2px 15px 2px;
+}
+
+input.textInput {
+  height: 30px;
+  padding: 5px;
+  border: 1px solid #E667AF;
+}
+
+input.formButton {
+  background-color: #FFFFFF;
+  color: #E6399B;
+  border: 1px solid #E667AF;
+  padding: 5px 8px 5px 8px;
+}
