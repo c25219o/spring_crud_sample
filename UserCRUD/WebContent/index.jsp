@@ -21,10 +21,10 @@
                 </tr>
                 <tr>
                     <td class="inForm"><input type="text" name="userId"
-                        placeholder="less than 8 characters" class="textInput"
+                        placeholder="more than 6 characters" class="textInput"
                         required></td>
                     <td class="inForm"><input type="password" name="password"
-                        placeholder="less than 8 characters" class="textInput"
+                        placeholder="more than 6 characters" class="textInput"
                         required></td>
                 </tr>
                 <c:if test="${hasError}">
