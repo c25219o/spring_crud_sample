@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+input.invalid {
+  background-color: #FFBBBB;
+}
+
+
+input.textInput {
+  height: 30px;
+  padding: 5px;
+  border: 1px solid #E667AF;
+}
+
+input.formButton {
+  background-color: #FFFFFF;
+  color: #E6399B;
+  border: 1px solid #E667AF;
+  padding: 5px 8px 5px 8px;
+}

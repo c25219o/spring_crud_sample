@@ -12,6 +12,6 @@
 <body>
 <%@include file="/WEB-INF/jsp/parts/header.jsp" %>
 
-とりあえずのログイン成功ページ(user)
+とりあえずのログイン成功ページ(admin)
 </body>
 </html>

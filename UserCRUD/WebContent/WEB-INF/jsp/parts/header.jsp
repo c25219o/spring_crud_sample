@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <div class="menu">
 
 </div>
 
 <div class="userInfo">
-    {name} さん<br>
-    <form action="logout.html">
-        <input type="submit" value="LOG OUT">
-    </form>
+    ${loginInfo.userName} さん<br>
+    <a href="<%=request.getContextPath()%>/logout.html">ログアウト</a>
 </div>

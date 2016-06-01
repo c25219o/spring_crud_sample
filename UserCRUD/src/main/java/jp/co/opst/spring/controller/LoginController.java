@@ -8,33 +8,61 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jp.co.opst.spring.bean.LoginInfo;
 import jp.co.opst.spring.entity.User;
 import jp.co.opst.spring.service.UserService;
 
 @Controller
+@SessionAttributes("loginInfo")
 public class LoginController {
 
     @Autowired
     private UserService service;
 
+    @RequestMapping("index")
+    public String index() {
+        return "/index";
+    }
+
+    @RequestMapping(value="login", method=RequestMethod.GET)
+    public String loginGet() {
+        return "redirect:/";
+    }
+
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(@RequestParam String userId, @RequestParam String password, Model model, HttpSession session) {
+    public String login(@RequestParam String userId, @RequestParam String password, Model model, HttpSession session,
+            RedirectAttributes attributes) {
 
         if (service.isCorrectUser(userId, password)) {
-
             User user = service.selectById(userId);
-            session.setAttribute("loginUser", user);
+            String userName = user.getLstName() + " " + user.getFstName();
+            String authority = user.getAuthority();
+            System.out.println(userName);
 
-            // TODO authority別処理！
-
-            return "redirect:/top.html";
+            LoginInfo loginInfo = new LoginInfo(userId, userName, authority);
+            session.setAttribute("loginInfo", loginInfo);
+            // 権限による画面分け
+            switch (user.getAuthority()) {
+            case "admin":
+                return "redirect:/admin/top.html";
+            case "user":
+                return "redirect:/user/top.html";
+            default:
+                return "redirect:/loginError.html";
+            }
         } else {
-            model.addAttribute("errorMessage", "Login faild");
-            model.addAttribute("hasError", true);
-
+            attributes.addFlashAttribute("hasError", true);
+            attributes.addFlashAttribute("errorMessage", "IDまたはパスワードが違います");
             return "redirect:/";
         }
+    }
+
+    @RequestMapping("/loginError")
+    public String loginError() {
+        return "loginError";
     }
 
 }

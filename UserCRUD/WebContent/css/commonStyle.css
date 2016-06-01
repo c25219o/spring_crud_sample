@@ -9,7 +9,7 @@ body {
   font-family: WebFont;
   font-size: 120%;
   font-weight: bolder;
-  background-color: #E0E0E0;
+  background-color: #F0F0F0;
 }
 
 input {
@@ -17,7 +17,7 @@ input {
   font-weight: bolder;
 }
 
-td.inForm {
+table.inForm td {
   padding: 7px 15px 7px 0px;
 }
 
@@ -35,15 +35,13 @@ td.inForm {
   margin: 0px 2px 15px 2px;
 }
 
-input.textInput {
-  height: 30px;
-  padding: 5px;
-  border: 1px solid #E667AF;
+.errorMessage {
+  color: #FF0033;
+  font-size: 80%;
 }
 
-input.formButton {
-  background-color: #FFFFFF;
-  color: #E6399B;
-  border: 1px solid #E667AF;
-  padding: 5px 8px 5px 8px;
+a {
+  color: #444444;
+  text-decoration: none;
+  border-bottom: dotted 2px #444444;
 }

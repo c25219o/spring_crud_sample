@@ -6,9 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TopController {
 
-    @RequestMapping("/top")
-    public String topPage(){
+    @RequestMapping("/user/top")
+    public String userTop(){
         return "user/top";
+    }
+
+    @RequestMapping("/admin/top")
+    public String adminTop(){
+        return "admin/top";
     }
 
 }
