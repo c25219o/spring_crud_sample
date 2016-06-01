@@ -30,7 +30,6 @@ public class LoginControllFilter implements Filter {
 
         if (mustCheckURI(requestURI) && hasNotLoggedIn(httpRequest)) {
             httpResponse.sendRedirect(contextPath);
-            return;
         }
         chain.doFilter(request, response);
 

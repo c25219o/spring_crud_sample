@@ -29,7 +29,7 @@ public class LoginController {
 
     @RequestMapping(value="login", method=RequestMethod.GET)
     public String loginGet() {
-        return "redirect:/";
+        return "redirect:/index.html";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
