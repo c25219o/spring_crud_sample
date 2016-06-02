@@ -42,7 +42,7 @@ public class CartController {
     public String addToCart(@RequestParam String[] goodsNum, @RequestParam int[] count) {
 
         Integer[] goodsCount = ArrayUtil.removeZero(count);
-        cart.addToCart(goodsNum, count);
+        cart.addToCart(goodsNum, goodsCount);
 
 
         // カートに遷移？
