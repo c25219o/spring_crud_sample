@@ -72,4 +72,18 @@
   </bean>
 
 
+  <!-- 買い物設定ファイルを読み込む -->
+  <!-- <bean id="shoppingProperties"
+    class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    <property name="basename" value="classpath:/resources/shopping" />
+  </bean> -->
+  <bean id="shoppingProperties"
+   class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+   <property name="locations">
+       <list>
+           <value>classpath:shopping.properties</value>
+       </list>
+   </property>
+</bean>
+
 </beans>

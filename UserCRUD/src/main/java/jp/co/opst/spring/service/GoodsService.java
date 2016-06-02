@@ -59,14 +59,16 @@ public class GoodsService {
      */
     public boolean isLastGoods(Goods goods) {
 
-        List<Goods> goodsNumListStr = dao.getOnlyGoodsNum();
-        List<Integer> goodsNumList = new ArrayList<>();
+//        List<Goods> goodsNumListStr = dao.getOnlyGoodsNum();
+//        List<Integer> goodsNumList = new ArrayList<>();
+//
+//        for (Goods eachGoods : goodsNumListStr) {
+//            goodsNumList.add(Integer.parseInt(eachGoods.getGoodsNum()));
+//        }
+//
+//        int max = ListUtil.maxInt(goodsNumList);
 
-        for (Goods eachGoods : goodsNumListStr) {
-            goodsNumList.add(Integer.parseInt(eachGoods.getGoodsNum()));
-        }
-
-        int max = ListUtil.maxInt(goodsNumList);
+        int max = dao.maxGoodsNum();
         int goodsNum = Integer.parseInt(goods.getGoodsNum());
 
         if (goodsNum == max) {

@@ -5,7 +5,9 @@ import java.util.Map;
 
 public enum PagingAction {
 
-    NEXT("next"), PREVIOUS("previous"), OTHER("");
+    NEXT("next"),
+    PREVIOUS("previous"),
+    OTHER("");
 
     private String action;
 
