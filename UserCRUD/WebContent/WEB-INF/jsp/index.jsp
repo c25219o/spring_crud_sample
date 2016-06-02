@@ -33,7 +33,7 @@
                 <tr>
                     <td><input type="text" name="userId" id="userId"
                         placeholder="more than 6 characters" class="textInput"
-                        required></td>
+                        required autofocus></td>
                     <td><input type="password" name="password" id="password"
                         placeholder="more than 6 characters" class="textInput"
                         required></td>

@@ -29,6 +29,10 @@ td.centering {
         text-align: center;
 }
 
+td.right {
+        text-align: right;
+}
+
 .fieldwrapper {
   margin: 100px auto;
   width: 70%;

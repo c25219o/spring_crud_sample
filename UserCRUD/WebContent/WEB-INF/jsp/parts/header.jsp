@@ -8,9 +8,9 @@
 </head>
 
 <div class="menu">
-<a href="xxxxxxxxxxxxxxx">商品検索</a>
-<a href="xxxxxxxxxxxxxxx">カート</a>
-<a href="xxxxxxxxxxxxxxx">マイページ</a>
+<a href="<%=request.getContextPath()%>/${loginInfo.authority}/shopping.html">商品検索</a>
+<a href="<%=request.getContextPath()%>/${loginInfo.authority}/cart.html">カート</a>
+<a href="<%=request.getContextPath()%>/${loginInfo.authority}/myPage.html">マイページ</a>
 </div>
 
 <div class="userInfo">
