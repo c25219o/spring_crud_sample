@@ -49,7 +49,8 @@ public class LoginController {
             case "admin":
                 return "redirect:/admin/top.html";
             case "user":
-                return "redirect:/user/top.html";
+//                return "redirect:/user/top.html";
+                return "redirect:/user/shopping.html";
             default:
                 return "redirect:/loginError.html";
             }

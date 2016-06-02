@@ -21,6 +21,10 @@ table.inForm td {
   padding: 7px 15px 7px 0px;
 }
 
+td.centering {
+        text-align: center;
+}
+
 .fieldwrapper {
   margin: 100px auto;
   width: 70%;
