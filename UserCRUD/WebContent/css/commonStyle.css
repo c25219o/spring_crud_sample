@@ -21,6 +21,10 @@ table.inForm td {
   padding: 7px 15px 7px 0px;
 }
 
+table.general td, th {
+        padding: 5px;
+}
+
 td.centering {
         text-align: center;
 }

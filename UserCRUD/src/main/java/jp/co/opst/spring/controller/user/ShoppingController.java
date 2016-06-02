@@ -7,11 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import jp.co.opst.spring.controller.params.SearchParam;
-import jp.co.opst.spring.controller.service.GoodsService;
-import jp.co.opst.spring.dao.GoodsDao;
+import jp.co.opst.spring.constants.PagingAction;
 import jp.co.opst.spring.entity.Goods;
+import jp.co.opst.spring.params.Pager;
+import jp.co.opst.spring.params.SearchParam;
+import jp.co.opst.spring.service.GoodsService;
+import jp.co.opst.util.literal.LengthUtil;
 
 @Controller
 public class ShoppingController {
@@ -19,17 +22,40 @@ public class ShoppingController {
     @Autowired
     GoodsService service;
 
-    @RequestMapping("/user/shopping")
-    public String goodsList(Model model, @ModelAttribute SearchParam params) {
+    @RequestMapping(value="/user/shopping"/*, method=RequestMethod.POST*/)
+    public String goodsList(Model model, @ModelAttribute SearchParam searchParam, @ModelAttribute Pager pager) {
+
+        int nextPage = 1;
+
+        if(LengthUtil.isNotEmpty(pager.getPagingAction())) {
+            nextPage = pager.getCurrentPage();
+
+            switch (PagingAction.of(pager.getPagingAction())) {
+            case NEXT:
+                nextPage++;
+                break;
+
+            case PREVIOUS:
+                nextPage--;
+                break;
+
+            default:
+                // do nothing;
+            }
+        }
 
         List<Goods> goodsList;
-        if (params.hasCondition()) {
-            goodsList = service.findByCondition(params);
+
+        if (searchParam.hasCondition()) {
+            goodsList = service.findByCondition(searchParam);
         } else {
-            goodsList = service.findAll();
+            goodsList = service.byId(null, nextPage, 10);
+//            goodsList = service.findAll();
         }
 
         model.addAttribute("goodsList", goodsList);
+        model.addAttribute("pageNum", nextPage);
+        model.addAttribute("isLastPage", service.isLastGoods(goodsList.get(goodsList.size()-1)));
         return "user/shopping/goodsList";
     }
 

@@ -25,3 +25,14 @@ input.midiumNumber {
         width: 70px;
 }
 
+form.inline {
+        display: inline-block;
+}
+
+input[type="submit"].textSubmit {
+        font-size: 80%;
+        color: #444444;
+        background-color: transparent;
+        border:none;
+        border-bottom: dotted 2px #444444;
+}

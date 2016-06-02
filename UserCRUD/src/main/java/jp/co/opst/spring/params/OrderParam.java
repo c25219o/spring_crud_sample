@@ -1,4 +1,4 @@
-package jp.co.opst.spring.controller.params;
+package jp.co.opst.spring.params;
 
 public class OrderParam {
 

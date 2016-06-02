@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/commonStyle.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/formStyle.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/tableBorderStyle.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/goodsTableStyle.css">
 <title>商品一覧</title>
 </head>
 <body>
@@ -33,6 +34,24 @@
                 </form>
         </div>
         <div>
+                <c:if test="${pageNum != 1}">
+                        <form action="<%=request.getContextPath()%>/${loginInfo.authority}/shopping.html"
+                                method="POST" name="previous" class="inline">
+                                <input type="hidden" name="pagingAction" value="previous"> <input type="hidden"
+                                        name="currentPage" value="${pageNum}">
+                                <input type="submit" value="前へ" class="textSubmit">
+                        </form>
+                </c:if>
+                <c:if test="${!isLastPage}">
+                        <form action="<%=request.getContextPath()%>/${loginInfo.authority}/shopping.html"
+                                method="POST" name="next" class="inline">
+                                <input type="hidden" name="pagingAction" value="next"> <input type="hidden"
+                                        name="currentPage" value="${pageNum}">
+                                <input type="submit" value="次へ" class="textSubmit">
+                        </form>
+                </c:if>
+        </div>
+        <div>
                 <c:choose>
                         <c:when test="${empty goodsList}">
                                 <div class="paragraph">
@@ -41,27 +60,31 @@
                         </c:when>
                         <c:otherwise>
                                 <form action="" method="POST">
-                                        <table>
+                                        <table class="general">
                                                 <tr>
-                                                        <th>商品名</th>
-                                                        <th>商品詳細</th>
-                                                        <th>価格</th>
-                                                        <th>個数</th>
-                                                        <th>購入</th>
+                                                        <th class="goodsName">商品名</th>
+                                                        <th class="goodsExp">商品詳細</th>
+                                                        <th class="maker">メーカー</th>
+                                                        <th class="price">価格</th>
+                                                        <th class="count">個数</th>
+                                                        <th class="buy">購入</th>
                                                 </tr>
                                                 <c:forEach var="goods" items="${goodsList}">
                                                         <tr>
                                                                 <td>${goods.goodsName}</td>
                                                                 <td>${goods.goodsExp}</td>
+                                                                <td>${goods.maker}</td>
                                                                 <td class="centering">￥${goods.goodsPrice}</td>
-                                                                <td class="centering"><input type="number" name="count[]" value="0" class="shortNumber"></td>
-                                                                <td class="centering"><input type="checkbox" name="goodsNum[]" value="${goodsNum}"></td>
+                                                                <td class="centering"><input type="number" name="count[]" value="0"
+                                                                        class="shortNumber"></td>
+                                                                <td class="centering"><input type="checkbox" name="goodsNum[]"
+                                                                        value="${goodsNum}"></td>
                                                         </tr>
                                                 </c:forEach>
                                                 <tr>
-                                                        <td colspan="2">合計金額</td>
-                                                        <td><span id="totalPrice">＊合計価格＊</span></td>
-                                                        <td colspan="2"><input type="submit" value="カートに追加する"></td>
+                                                        <td colspan="3">合計金額</td>
+                                                        <td class="centering"><span id="totalPrice">＊合計価格＊</span></td>
+                                                        <td colspan="2" class="centering"><input type="submit" value="カートに追加する"></td>
                                                 </tr>
                                         </table>
                                 </form>
