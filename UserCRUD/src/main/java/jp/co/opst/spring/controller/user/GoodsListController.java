@@ -17,7 +17,7 @@ import jp.co.opst.spring.service.GoodsService;
 import jp.co.opst.util.literal.LengthUtil;
 
 @Controller
-public class ShoppingController {
+public class GoodsListController {
 
     @Autowired
     GoodsService service;
@@ -62,5 +62,8 @@ public class ShoppingController {
         model.addAttribute("isLastPage", service.isLastGoods(goodsList.get(goodsList.size()-1)));
         return "user/shopping/goodsList";
     }
+
+//    @RequestMapping(value="", method=RequestMethod.POST)
+//    public String addToCart
 
 }

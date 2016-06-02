@@ -82,7 +82,7 @@
                                                         </tr>
                                                 </c:forEach>
                                                 <tr>
-                                                        <td colspan="3">合計金額</td>
+                                                        <td colspan="3" class="right">合計金額</td>
                                                         <td class="centering"><span id="totalPrice">＊合計価格＊</span></td>
                                                         <td colspan="2" class="centering"><input type="submit" value="カートに追加する"></td>
                                                 </tr>
