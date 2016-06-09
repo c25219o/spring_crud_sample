@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  * カートクラス
@@ -14,11 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Cart {
 
-    private Map<String, Integer> items;
-
-    public Cart() {
-        items = new HashMap<>();
-    }
+    private Map<String, Integer> items = new HashMap<>();
 
     public void addToCart(String[] goodsNum, Integer[] count) {
         // 数が合わない場合はどこではじくか
@@ -31,12 +28,12 @@ public class Cart {
 
         // 既にカートの中身がある場合
         if (items.containsKey(goodsNum)) {
-            items.put(goodsNum, count);
+            int previousCount = items.get(goodsNum);
+            items.put(goodsNum, previousCount + count);
 
         // まだカートの中身がない場合
         } else {
-            int previousCount = items.get(goodsNum);
-            items.put(goodsNum, previousCount + count);
+            items.put(goodsNum, count);
         }
     }
 

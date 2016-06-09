@@ -38,17 +38,26 @@ public class CartController {
         return null;
     }
 
-    @RequestMapping(value="", method=RequestMethod.POST)
-    public String addToCart(@RequestParam String[] goodsNum, @RequestParam int[] count) {
+    @RequestMapping(value="user/addToCart", method=RequestMethod.POST)
+    public String addToCart(@RequestParam String[] goodsNum, @RequestParam int[] count, HttpSession session) {
 
+    	
+    	for (int i : count) {
+			System.out.println(i);
+		}
+    	for (String s : goodsNum) {
+			System.out.println(s);
+		}
+    	
         Integer[] goodsCount = ArrayUtil.removeZero(count);
         cart.addToCart(goodsNum, goodsCount);
+        session.setAttribute("cart", cart);
 
 
         // カートに遷移？
-        return "redirect:user/cart/html";
+//        return "redirect:user/cart/html";
 
         // 商品一覧に遷移？
-//        return "redirect:user/shopping.html";
+        return "redirect:/user/shopping.html";
     }
 }

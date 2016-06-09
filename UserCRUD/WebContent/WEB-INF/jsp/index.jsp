@@ -33,10 +33,14 @@
                 <tr>
                     <td><input type="text" name="userId" id="userId"
                         placeholder="more than 6 characters" class="textInput"
-                        required autofocus></td>
+                        required autofocus>
+                        ${errorMap.userId}
+                        <form:errors path="userId"/>
+                        </td>
                     <td><input type="password" name="password" id="password"
                         placeholder="more than 6 characters" class="textInput"
-                        required></td>
+                        required>
+                        <form:errors path="password"/></td>
                 </tr>
                 <tr>
                     <td><c:if test="${hasError}">
@@ -49,13 +53,13 @@
 
 
                 <tr>
-                    <td colspan="2"><input type="submit" value="LOG IN"
-                        class="formButton" onclick="return isValid()"></td>
+                    <td colspan="2"><input type="submit" value="LOG IN">
+                        <!-- class="formButton" onclick="return isValid()"> --></td>
                 </tr>
             </table>
         </form>
     </div>
     <script src="js/jquery-2.2.3.js"></script>
-    <script src="js/login_validation.js"></script>
+    <!-- <script src="js/login_validation.js"></script> -->
 </body>
 </html>

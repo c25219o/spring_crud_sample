@@ -15,7 +15,7 @@
         <%@include file="/WEB-INF/jsp/parts/header.jsp"%>
 
         <div>
-                <form action="<%=request.getContextPath()%>/${loginInfo.authority}/shopping.html">
+                <form action="<%=request.getContextPath()%>/${loginInfo.authority}/add.html">
                         <table>
                                 <tr>
                                         <td>商品名<input type="text" name="goodsName"></td>
@@ -59,7 +59,7 @@
                                 </div>
                         </c:when>
                         <c:otherwise>
-                                <form action="" method="POST">
+                                <form action="${pageContext.servletContext.contextPath}/${loginInfo.authority}/addToCart.html" method="POST">
                                         <table class="general">
                                                 <tr>
                                                         <th class="goodsName">商品名</th>
@@ -75,10 +75,10 @@
                                                                 <td>${goods.goodsExp}</td>
                                                                 <td>${goods.maker}</td>
                                                                 <td class="centering">￥${goods.goodsPrice}</td>
-                                                                <td class="centering"><input type="number" name="count[]" value="0"
+                                                                <td class="centering"><input type="number" name="count" value="0"
                                                                         class="shortNumber"></td>
-                                                                <td class="centering"><input type="checkbox" name="goodsNum[]"
-                                                                        value="${goodsNum}"></td>
+                                                                <td class="centering"><input type="checkbox" name="goodsNum"
+                                                                        value="${goods.goodsNum}"></td>
                                                         </tr>
                                                 </c:forEach>
                                                 <tr>

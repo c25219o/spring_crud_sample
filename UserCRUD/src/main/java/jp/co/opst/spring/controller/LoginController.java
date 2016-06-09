@@ -19,51 +19,62 @@ import jp.co.opst.spring.service.UserService;
 @SessionAttributes("loginInfo")
 public class LoginController {
 
-    @Autowired
-    private UserService service;
+	@Autowired
+	private UserService service;
 
-    @RequestMapping("index")
-    public String index() {
-        return "/index";
-    }
+	@RequestMapping("index")
+	public String index() {
+		return "/index";
+	}
 
-    @RequestMapping(value="login", method=RequestMethod.GET)
-    public String loginGet() {
-        return "redirect:/index.html";
-    }
+	@RequestMapping(value = "login", method = RequestMethod.GET)
+	public String loginGet() {
+		return "redirect:/index.html";
+	}
 
-    @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(@RequestParam String userId, @RequestParam String password, Model model, HttpSession session,
-            RedirectAttributes attributes) {
+	@RequestMapping(value = "login", method = RequestMethod.POST)
+	public String login(@RequestParam String userId, @RequestParam String password, Model model, HttpSession session,
+	        RedirectAttributes attributes) {
 
-        if (service.isCorrectUser(userId, password)) {
-            User user = service.selectById(userId);
-            String userName = user.getLstName() + " " + user.getFstName();
-            String authority = user.getAuthority();
-            System.out.println(userName);
+		// if (result.hasErrors()){
+		// return "/index";
+		// }
 
-            LoginInfo loginInfo = new LoginInfo(userId, userName, authority);
-            session.setAttribute("loginInfo", loginInfo);
-            // 権限による画面分け
-            switch (user.getAuthority()) {
-            case "admin":
-                return "redirect:/admin/top.html";
-            case "user":
-//                return "redirect:/user/top.html";
-                return "redirect:/user/shopping.html";
-            default:
-                return "redirect:/loginError.html";
-            }
-        } else {
-            attributes.addFlashAttribute("hasError", true);
-            attributes.addFlashAttribute("errorMessage", "IDまたはパスワードが違います");
-            return "redirect:/";
-        }
-    }
+		// Validation validation = new Validation();
+		// Map<String, String> errorMap = validation.validation(userId);
+		// if (!errorMap.isEmpty()) {
+		// model.addAllAttributes(errorMap);
+		// return "/index";
+		// }
 
-    @RequestMapping("/loginError")
-    public String loginError() {
-        return "loginError";
-    }
+		if (service.isCorrectUser(userId, password)) {
+			User user = service.selectById(userId);
+			String userName = user.getLstName() + " " + user.getFstName();
+			String authority = user.getAuthority();
+			System.out.println(userName);
+
+			LoginInfo loginInfo = new LoginInfo(userId, userName, authority);
+			session.setAttribute("loginInfo", loginInfo);
+			// 権限による画面分け
+			switch (user.getAuthority()) {
+			case "admin":
+				return "redirect:/admin/top.html";
+			case "user":
+				// return "redirect:/user/top.html";
+				return "redirect:/user/shopping.html";
+			default:
+				return "redirect:/loginError.html";
+			}
+		} else {
+			attributes.addFlashAttribute("hasError", true);
+			attributes.addFlashAttribute("errorMessage", "IDまたはパスワードが違います");
+			return "redirect:/";
+		}
+	}
+
+	@RequestMapping("/loginError")
+	public String loginError() {
+		return "loginError";
+	}
 
 }

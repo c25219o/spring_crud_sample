@@ -45,13 +45,13 @@
 
 
   <!-- Springのコネクションプールの利用 -->
-  <!-- <bean id="dataSource"
+  <bean id="dataSource"
     class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-    <property name="url" value="jdbc:mysql://192.168.50.101:3306/user99" />
-    <property name="username" value="user99" />
-    <property name="password" value="user99" />
-  </bean> -->
+    <property name="driverClassName" value="${jdbc.driverClassName}" />
+    <property name="url" value="${jdbc.url}" />
+    <property name="username" value="${jdbc.username}" />
+    <property name="password" value="${jdbc.password}" />
+  </bean>
 
   <!-- SpringのTemplateの利用 -->
   <bean
@@ -63,13 +63,13 @@
   <context:property-placeholder location="classpath:jdbc.properties" />
 
   <!-- コネクションプールをApache DBCPに変更 -->
-  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+  <!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
     destroy-method="close">
     <property name="driverClassName" value="${jdbc.driverClassName}" />
     <property name="url" value="${jdbc.url}" />
     <property name="username" value="${jdbc.username}" />
     <property name="password" value="${jdbc.password}" />
-  </bean>
+  </bean> -->
 
 
   <!-- 買い物設定ファイルを読み込む -->
@@ -82,6 +82,14 @@
    <property name="locations">
        <list>
            <value>classpath:shopping.properties</value>
+       </list>
+   </property>
+</bean>
+  <bean id="validationProperties"
+   class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+   <property name="locations">
+       <list>
+           <value>classpath:validation.properties</value>
        </list>
    </property>
 </bean>
